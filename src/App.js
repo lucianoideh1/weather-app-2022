@@ -6,7 +6,7 @@ import { useState} from "react";
 
 function App() {
 
-  const [curentWeather, setCurrentWeather]  = useState(null);
+  const [currentWeather, setCurrentWeather]  = useState(null);
   const [forecast, setForecast]  = useState(null);
 
   const handleOnSearchChange = (searchData) => {
@@ -20,20 +20,20 @@ function App() {
       const weatherResponse = await response[0].json();
       const forecastResponse = await response[1].json();
 
-      setCurrentWeather({ city:searchData.label, ...weatherResponse});
-      setForecast({ city:searchData.label, ...forecastResponse});
+      setCurrentWeather({ city: searchData.label , ...weatherResponse});
+      setForecast({ city: searchData.label, ...forecastResponse});
     })
     .catch((err) => console.log(err));
 
   }
 
-  console.log(curentWeather)
-  console.log(forecast)
+  console.log(currentWeather);
+  console.log(forecast);
 
   return (
     <div className="container">
      <Search onSearchChange={handleOnSearchChange}/>
-     <CurrentWeather />
+     {currentWeather && <CurrentWeather  data={currentWeather}/>}
     </div>
   );
 }
